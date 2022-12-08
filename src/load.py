@@ -48,6 +48,10 @@ class Map:
                 tmp = x
             else:
                 return None
+            while (self.converted_map[tmp[0] + 1][tmp[1]] == '0'):
+                tmp = (tmp[0] + 1, tmp[1])
+        while (self.converted_map[tmp[0] + 1] == '0'):
+                tmp = (tmp[0] + 1, tmp[1])
         return tmp
 
 class Action:
