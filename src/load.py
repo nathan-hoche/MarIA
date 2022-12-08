@@ -38,21 +38,43 @@ class Map:
         self.converted_map = convert_map(self.map)
         self.player, self.objectif = get_player_and_objectif(self.converted_map)
     
-    def movePlayer(self, moves) -> tuple[int, int]:
+    def movePlayer(self, graph) -> tuple[int, int]:
         tmp = self.player
-        for move in moves:
+        for move in graph:
             x = (tmp[0] + move['moves']['y'], tmp[1] + move['moves']['x'])
-            print(x)
             if x[0] >= 0 and x[1] >= 0 and x[0] < len(self.converted_map) and \
             x[1] < len(self.converted_map[0]) and self.converted_map[x[0]][x[1]] != '1':
                 tmp = x
             else:
                 return None
-            while (self.converted_map[tmp[0] + 1][tmp[1]] == '0'):
+            while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1][tmp[1]] == '0'):
                 tmp = (tmp[0] + 1, tmp[1])
-        while (self.converted_map[tmp[0] + 1] == '0'):
-                tmp = (tmp[0] + 1, tmp[1])
+        while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1] == '0'):
+            tmp = (tmp[0] + 1, tmp[1])
         return tmp
+
+    def printMovePlayerStepByStep(self, graph) -> None:
+        tmp = self.player
+        for move in graph:
+            x = (tmp[0] + move['moves']['y'], tmp[1] + move['moves']['x'])
+            if x[0] >= 0 and x[1] >= 0 and x[0] < len(self.converted_map) and \
+            x[1] < len(self.converted_map[0]) and self.converted_map[x[0]][x[1]] != '1':
+                tmp = x
+            else:
+                return None
+            while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1][tmp[1]] == '0'):
+                tmp = (tmp[0] + 1, tmp[1])
+            mtmp = self.map.split('\n')
+            mtmp[tmp[0]] = mtmp[tmp[0]][:tmp[1]] + 'N' + mtmp[tmp[0]][tmp[1] + 1:]
+            mtmp = '\n'.join(mtmp)
+            print(mtmp)
+        while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1] == '0'):
+            tmp = (tmp[0] + 1, tmp[1])
+        mtmp = self.map.split('\n')
+        mtmp[tmp[0]] = mtmp[tmp[0]][:tmp[1]] + 'N' + mtmp[tmp[0]][tmp[1] + 1:]
+        mtmp = '\n'.join(mtmp)
+        print(mtmp)
+
 
 class Action:
     def __init__(self):
