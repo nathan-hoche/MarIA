@@ -37,4 +37,21 @@ class Map:
         self.map = load_map(name)
         self.converted_map = convert_map(self.map)
         self.player, self.objectif = get_player_and_objectif(self.converted_map)
+    
+    def movePlayer(self, moves) -> tuple[int, int]:
+        tmp = self.player
+        for move in moves:
+            x = (tmp[0] + move['moves']['y'], tmp[1] + move['moves']['x'])
+            print(x)
+            if x[0] >= 0 and x[1] >= 0 and x[0] < len(self.converted_map) and \
+            x[1] < len(self.converted_map[0]) and self.converted_map[x[0]][x[1]] != '1':
+                tmp = x
+            else:
+                return None
+        return tmp
 
+class Action:
+    def __init__(self):
+        with open('actions.json') as f:
+            ACTION = json.load(f)
+        self.action = ACTION

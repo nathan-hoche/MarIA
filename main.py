@@ -1,6 +1,10 @@
 from src.load import Map
+from src.utils import Graph
+
 
 m = Map('map1.txt')
-print("Player", m.player, "| Objectif", m.objectif)
-print("MAPS:\n", m.map)
-print("MAPS:\n", *m.converted_map, sep='\n')
+
+g = Graph(5)
+
+player = m.movePlayer(g.graph)
+print(player)
