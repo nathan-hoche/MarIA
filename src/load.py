@@ -32,6 +32,12 @@ def get_player_and_objectif(map):
     map[player[0]][player[1]] = '0'
     return player, objectif
 
+def print_map(map, player):
+    mtmp = map.split('\n')
+    mtmp[player[0]] = mtmp[player[0]][:player[1]] + 'N' + mtmp[player[0]][player[1] + 1:]
+    mtmp = '\n'.join(mtmp)
+    print(mtmp)
+
 class Map:
     def __init__(self, name):
         self.map = load_map(name)
@@ -64,17 +70,7 @@ class Map:
                 return None
             while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1][tmp[1]] == '0'):
                 tmp = (tmp[0] + 1, tmp[1])
-            mtmp = self.map.split('\n')
-            mtmp[tmp[0]] = mtmp[tmp[0]][:tmp[1]] + 'N' + mtmp[tmp[0]][tmp[1] + 1:]
-            mtmp = '\n'.join(mtmp)
-            print(mtmp)
-        while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1] == '0'):
-            tmp = (tmp[0] + 1, tmp[1])
-        mtmp = self.map.split('\n')
-        mtmp[tmp[0]] = mtmp[tmp[0]][:tmp[1]] + 'N' + mtmp[tmp[0]][tmp[1] + 1:]
-        mtmp = '\n'.join(mtmp)
-        print(mtmp)
-
+            print_map(self.map, tmp)
 
 class Action:
     def __init__(self):

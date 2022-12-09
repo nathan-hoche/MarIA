@@ -3,7 +3,7 @@ from src.utils import Graph, heuristic
 import random
 
 
-m = Map('map1.txt')
+m = Map('map2.txt')
 player = None
 
 
@@ -25,7 +25,7 @@ class Genetic():
             if (p['pos'] == None):
                 p['fitness'] = 999999
             else:
-                p['fitness'] = heuristic.Manhattan(p['pos'], m.objectif)
+                p['fitness'] = heuristic.Manhattan(p['pos'], m.objectif) + 0.001 * len(p['indiv'].graph)
     
     def selection(self):
         self.pos.sort(key=lambda x: x['fitness'])
@@ -61,7 +61,7 @@ class Genetic():
                 indiv.mutateGene()
 
 pop = Genetic(5, 100)
-for i in range(35):
+for i in range(100):
     pop.evaluate()
     pop.fitness()
     f = pop.selection()

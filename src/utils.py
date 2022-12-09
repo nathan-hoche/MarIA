@@ -29,17 +29,26 @@ class Graph():
         return iter(self.graph)
     
     def addGene(self):
-        r = random.randint(0, len(self.action) - 1)
-        self.graph.append(Node(self.action[r]))
+        nb = random.randint(1, 5)
+        for _ in range(nb):
+            r = random.randint(0, len(self.action) - 1)
+            self.graph.append(Node(self.action[r]))
     
     def removeGene(self):
-        if len(self.graph) > 1:
+        nb = random.randint(1, 5)
+        for _ in range(nb):
+            if len(self.graph) == 1:
+                break
             r = random.randint(0, len(self.graph) - 1)
             self.graph.pop(r)
     
     def mutateGene(self):
-        r = random.randint(0, len(self.graph) - 1)
-        self.graph[r] = Node(self.action[random.randint(0, len(self.action) - 1)])
+        nb = random.randint(1, 5)
+        for _ in range(nb):
+            if len(self.graph) == 1:
+                break
+            r = random.randint(0, len(self.graph) - 1)
+            self.graph[r] = Node(self.action[random.randint(0, len(self.action) - 1)])
 
 
 class heuristic:
