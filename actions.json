@@ -6,5 +6,13 @@
     {
         "name": "walk",
         "moves": {"x": 1, "y":0}
+    }, 
+    {
+        "name": "go back",
+        "moves": {"x": -1, "y": 0}
+    }, 
+    {
+        "name": "wait",
+        "moves": {"x": 0, "y": 0}
     }
 ]
