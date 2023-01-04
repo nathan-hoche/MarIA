@@ -2,10 +2,8 @@ from src.load import Map
 from src.utils import Graph, heuristic
 import random
 
-
 m = Map('map2.txt')
 player = None
-
 
 class Genetic():
     def __init__(self, nbGene, nbInd):

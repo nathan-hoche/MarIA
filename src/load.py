@@ -1,4 +1,6 @@
 import json
+import os
+import time
 
 with open('maps/config.json') as f:
     MAP_CONFIG = json.load(f)
@@ -70,7 +72,9 @@ class Map:
                 return None
             while (tmp[0] + 1 < len(self.converted_map) and self.converted_map[tmp[0] + 1][tmp[1]] == '0'):
                 tmp = (tmp[0] + 1, tmp[1])
+            os.system('clear')
             print_map(self.map, tmp)
+            time.sleep(0.5)
 
 class Action:
     def __init__(self):
