@@ -1,9 +1,7 @@
 from src.load import Map
 from src.utils import Graph, heuristic
 import random
-
-m = Map('map2.txt')
-player = None
+import sys
 
 class Genetic():
     def __init__(self, nbGene, nbInd):
@@ -58,15 +56,21 @@ class Genetic():
             else:
                 indiv.mutateGene()
 
-pop = Genetic(5, 100)
-for i in range(100):
-    pop.evaluate()
-    pop.fitness()
-    f = pop.selection()
-    print("Generation:", i, "Best Fitness:", f)
-    pop.crossover()
-    pop.mutation()
 
+args = sys.argv
 
-player = pop.pos[0]['indiv']
-m.printMovePlayerStepByStep(player)
+if len(args) == 5:
+    m = Map(args[1])
+    pop = Genetic(int(args[2]), int(args[3]))
+    for i in range(int(args[4])):
+        pop.evaluate()
+        pop.fitness()
+        f = pop.selection()
+        print("Generation:", i, "Best Fitness:", f)
+        pop.crossover()
+        pop.mutation()
+
+    m.printMovePlayerStepByStep(pop.pos[0]['indiv'])
+else:
+    print("Usage: python main.py [map.txt] [nbStartingGene] [nbPopulation] [nbGeneration]")
+    print("Example: python main.py map1.txt 5 100 100")
